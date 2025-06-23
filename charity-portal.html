@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Same head as index.html -->
+    <title>Charity Portal - Leftover Savior</title>
+</head>
+<body>
+    <header>
+        <h1>Charity Portal</h1>
+        <p>Manage food donations from restaurants</p>
+    </header>
+
+    <main>
+        <section id="donations-list">
+            <h2>Available Donations</h2>
+            <div class="filters">
+                <select id="food-type-filter">
+                    <option value="all">All Types</option>
+                    <option value="cooked">Cooked Meals</option>
+                    <option value="raw">Raw Ingredients</option>
+                </select>
+                <button id="refresh-btn">Refresh</button>
+            </div>
+            <ul id="donations"></ul>
+        </section>
+
+        <section id="scheduled-pickups">
+            <h2>Your Scheduled Pickups</h2>
+            <ul id="pickups"></ul>
+        </section>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script src="charity-portal.js"></script>
+</body>
+</html>
