@@ -1,37 +1,22 @@
-:root {
-    --primary: #0e9634;
-    --secondary: #eef52c;
-    --dark: #333;
-    --light: #f9f9f9;
-    --gray: #ddd;
-}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Cenzel', sans-serif;
+    font-family: 'Ariel', sans-serif;
+}
+
+h2, h3 {
+    color: black;
+}
+
+header{
+    text-align: center;
 }
 
 body {
-    background-color: var(--light);
-    color: var(--dark);
-    line-height: 1.6;
-}
-
-header {
-    
-    color: white;
-    text-align: center;
-    padding: 2rem 1rem;
-    margin-bottom: 2rem;
-    background: hsla(270, 94%, 25%, 1);
-    background: linear-gradient(90deg, hsla(270, 94%, 25%, 1) 0%, hsla(158, 94%, 49%, 1) 100%);
-    background: -moz-linear-gradient(90deg, hsla(270, 94%, 25%, 1) 0%, hsla(158, 94%, 49%, 1) 100%);
-    background: -webkit-linear-gradient(90deg, hsla(270, 94%, 25%, 1) 0%, hsla(158, 94%, 49%, 1) 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#42047E", endColorstr="#07F49E", GradientType=1 );
-}
-
+    background: radial-gradient(circle, #EF2F15, #FFB505);
+    }
 /* Header Logo Style */
 .logo-container {
   text-align: center;
@@ -40,8 +25,10 @@ header {
 
 .logo {
   height: 100px; /* Adjust as needed */
-  width: 100%;
+  width: 150px;
   max-width: 200px;
+  border-radius: 50px;
+  
 }
 
 header h1 {
@@ -56,7 +43,7 @@ main {
 }
 
 .stats-card {
-    background: white;
+    background-color: #EF2F15;
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
@@ -65,11 +52,12 @@ main {
 }
 
 .stats-card h3 {
-    color: var(--primary);
+    color: black;
     margin-bottom: 0.5rem;
 }
 
 .stats-card p {
+    color: black;
     font-size: 2rem;
     font-weight: bold;
 }
@@ -87,15 +75,80 @@ main {
 }
 
 .primary-btn {
-    background-color: var(--primary);
+    background-color: black;
     color: white;
     width: 100%;
+    height: 30px;
 }
 
 .secondary-btn {
-    background-color: var(--secondary);
-    color: white;
+    background-color: rgb(8, 8, 8);
+    color: rgb(255, 253, 253);
     width: 100%;
+    height: 30px;
+    
+}
+
+.secondary-btn:hover{
+     font-size: 1rem;
+     color: #ffffff;
+     position: relative;
+     display: inline-block;
+}
+
+.secondary-btn::after,
+.secondary-btn::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, green, #00ffff);
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease-out;
+}
+
+.secondary-btn::before {
+  top: -5px;
+  transform-origin: left;
+}
+
+.secondary-btn:hover::after,
+.secondary-btn:hover::before {
+  transform: scaleX(1);
+}
+
+.primary-btn:hover{
+     font-size: 1rem;
+     color: #ffffff;
+     position: relative;
+     display: inline-block;
+}
+
+.primary-btn::after,
+.primary-btn::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, green, #00ffff);
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease-out;
+}
+
+.primary-btn::before {
+  top: -5px;
+  transform-origin: left;
+}
+
+.primary-btn:hover::after,
+.primary-btn:hover::before {
+  transform: scaleX(1);
 }
 
 .btn:hover {
@@ -104,7 +157,8 @@ main {
 }
 
 .food-list {
-    background: white;
+    background: #EF2F15;
+    color: black;
     border-radius: 8px;
     padding: 1.5rem;
     margin: 1.5rem 0;
@@ -113,7 +167,7 @@ main {
 
 .food-list h2 {
     margin-bottom: 1rem;
-    color: var(--primary);
+    color: black;
 }
 
 #food-items {
@@ -124,7 +178,7 @@ main {
     display: flex;
     justify-content: space-between;
     padding: 1rem;
-    border-bottom: 1px solid var(--gray);
+    border-bottom: 1px solid black;
 }
 
 .food-item:last-child {
@@ -150,9 +204,10 @@ main {
 .form-group select {
     width: 100%;
     padding: 0.8rem;
-    border: 1px solid var(--gray);
+    border: 1px solid black;
     border-radius: 4px;
     font-size: 1rem;
+    background-color: #EF2F15;
 }
 
 .form-actions {
@@ -164,15 +219,18 @@ main {
 /* Map Styles */
 #map {
     height: 300px;
-    background-color: var(--gray);
+    background-color: black;
     margin: 1.5rem 0;
     border-radius: 8px;
 }
 
 footer {
+    position: relative;
     text-align: center;
-    padding: 1.5rem;
-    margin-top: 2rem;
-    background-color: var(--dark);
-    color: white;
+    padding: 1.0rem;
+    margin-top: 4.3rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: #EF2F15;
+    color: black;
 }

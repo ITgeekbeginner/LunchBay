@@ -1,4 +1,14 @@
 // Initialize Firebase (same config as main app)
+const firebaseConfig = {
+  apiKey: "AIzaSyD8tptUGIUsijsdKNjJ-IiJao_xVpyczzY",
+  authDomain: "lunchbay-b864e.firebaseapp.com",
+  projectId: "lunchbay-b864e",
+  storageBucket: "lunchbay-b864e.firebasestorage.app",
+  messagingSenderId: "83931299741",
+  appId: "1:83931299741:web:c653e27331cb7f3d14b974",
+  measurementID: "G-Q55HMTQ3VP"
+};
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
@@ -27,7 +37,7 @@ function loadDonations() {
       li.innerHTML = `
         <div>
           <h3>${data.name}</h3>
-          <p>${data.quantity} ${data.unit} • ${data.type} • Expires: ${data.expiry}</p>
+          <p>${data.quantity} ${data.unit} | ${data.type} | Expires: ${data.expiry}</p>
           <p>From: Restaurant ${doc.id.substring(0, 5)}</p>
         </div>
         <button class="claim-btn" data-id="${doc.id}">Claim Donation</button>

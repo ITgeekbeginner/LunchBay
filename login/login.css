@@ -1,0 +1,101 @@
+/* Auth Page Styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 0 20px;
+}
+
+.auth-form {
+    background: linear-gradient(#EF2F15, #FFB505);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.auth-logo {
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.auth-form h2 {
+    color: black;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-btn:hover {
+    background-color: gray;
+}
+
+.auth-switch {
+    margin-top: 20px;
+    color: black;
+}
+
+.auth-switch a {
+    color: #EF2F15;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.hidden {
+    display: none;
+}
+
+.error-message {
+    color: yellow;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .auth-form {
+        padding: 20px;
+    }
+}

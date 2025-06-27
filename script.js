@@ -85,9 +85,12 @@ foodForm.addEventListener('submit', async (e) => {
 
 // Sample charities data
 const charities = [
-    { id: 1, name: "Community Food Bank", distance: "0.5 miles" },
-    { id: 2, name: "Hope Kitchen", distance: "1.2 miles" },
-    { id: 3, name: "Neighborhood Pantry", distance: "2.1 miles" }
+    { id: 1, name: "FoodForward", address: " | 21 Polaris Road, Lansdowne" },
+    { id: 2, name: "Ladles of Love", address: " | 3 Fifth street, Wynberg" },
+    { id: 3, name: "Salvation Army", address: " | Service Centers" },
+    { id: 4, name: "Homeless individuals", address: " | Johannesburg CBD corners" },
+    { id: 5, name: "Mamaile Kitchen", address: " | 28 Mekoa street" },
+    { id: 6, name: "Forgood", address: " | Benoni" }
 ];
 
 // Event Listeners
@@ -169,7 +172,7 @@ function displayCharities() {
         li.innerHTML = `
             <div>
                 <strong>${charity.name}</strong>
-                <span>${charity.distance} away</span>
+                <span>${charity.address} away</span>
             </div>
             <button class="schedule-btn" data-id="${charity.id}">Schedule</button>
         `;

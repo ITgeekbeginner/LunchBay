@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Same head content as before -->
+    <title>LunchBay - Auth</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Login Form -->
+        <div id="login-form" class="auth-form">
+            <img src="logo.png" alt="Logo" class="auth-logo">
+            <h2>Login to Your Account</h2>
+            <form id="login">
+                <div class="form-group">
+                    <input type="email" id="login-email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="auth-btn">Login</button>
+            </form>
+            <p class="auth-help">Forgot password? <a href="#" id="reset-password">Reset it here</a></p>
+            <p class="auth-switch">Don't have an account? <a href="#" id="show-register">Register</a></p>
+        </div>
+    <!-- Registration Form -->
+        <div id="register-form" class="auth-form hidden">
+            <img src="logo.png" alt="Logo" class="auth-logo">
+            <h2>Create New Account</h2>
+            <form id="register">
+                <div class="form-group">
+                    <input type="text" id="register-name" placeholder="Restaurant Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="register-email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="register-password" placeholder="Password (min 6 chars)" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <select id="register-type" required>
+                        <option value="">Select Account Type</option>
+                        <option value="restaurant">Restaurant</option>
+                        <option value="charity">Charity/Food Bank</option>
+                    </select>
+                </div>
+                <button type="submit" class="auth-btn">Register</button>
+            </form>
+            <p class="auth-switch">Already have an account? <a href="#" id="show-login">Login</a></p>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-auth-compat.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>
