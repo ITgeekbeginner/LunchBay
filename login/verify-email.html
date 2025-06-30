@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify Your Email</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-form">
+            <img src="logo.png" alt="Logo" class="auth-logo">
+            <h2>Verify Your Email</h2>
+            <p>We've sent a verification email to your address. Please click the link in that email to continue.</p>
+            <p>If you didn't receive the email, check your spam folder or:</p>
+            <button id="resend-verification" class="auth-btn">Resend Verification Email</button>
+            <button id="logout" class="auth-btn" style="margin-top: 10px; background-color: #ccc; color: #333;">Logout</button>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore-compat.js"></script>
+    <script src="verify-email.js"></script>
+</body>
+</html>

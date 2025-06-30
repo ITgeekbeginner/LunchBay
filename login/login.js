@@ -9,8 +9,19 @@ const firebaseConfig = {
     measurementID: "G-Q55HMTQ3VP"
 };
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+const app = firebase.initializeApp(firebaseConfig);
+
+// Get Firestore instance with error handling
+let db;
+try {
+    db = firebase.firestore();
+    console.log("Firestore initialized successfully");
+    
+} catch (error) {
+    console.error("Firestore initialization error:", error);
+    throw error;
+}
+//const db = firebase.firestore();
 const auth = firebase.auth();
 
 // DOM Elements
@@ -49,6 +60,66 @@ showLogin.addEventListener('click', (e) => {
     loginSection.classList.remove('hidden');
 });
 
+// Registration Function
+registerForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('register-email').value;
+    const password = document.getElementById('register-password').value;
+    const name = document.getElementById('register-name').value;
+    const accountType = document.getElementById('register-type').value;
+    
+      try {
+        console.log("Creating auth user...")
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        const uid = userCredential.user.uid;
+        console.log("Auth user created with UID:", uid);
+        
+          // 2. Prepare user data
+        const userData = {
+            name: name,
+            email: email,
+            type: accountType,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            emailVerified: false,
+            uid: uid // Add UID to document for easier queries
+        };
+
+            // Use transaction to ensure both operations succeed
+        await db.runTransaction(async (transaction) => {
+            const userRef = db.collection('users').doc(uid);
+            transaction.set(userRef, userData);
+        });
+
+        
+        // 5. Send verification email
+        console.log("Sending verification email...");
+        await userCredential.user.sendEmailVerification();
+        
+        alert('Registration successful! Please check your email for verification.');
+        registerSection.classList.add('hidden');
+        loginSection.classList.remove('hidden');
+
+    } catch (error) {
+        console.error("Full registration error:", error);
+        
+        // Clean up auth user if Firestore failed
+       if (auth.currentUser) {
+          console.log("Cleaning up auth user due to failure...");
+        try {
+          await auth.currentUser.delete();
+        } catch (deleteError){
+          console.error("Failed to delete auth user:", deleteError);
+        }
+       }
+        showError(registerForm, "Registration failed: " + error.message);
+    } finally {
+        if (submitBtn){
+            submitBtn.disable = false;
+            submitBtn.textContent = originalBtnText;
+        }
+    }
+});
+
 // Login Function
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -57,21 +128,26 @@ loginForm.addEventListener('submit', async (e) => {
     
       try {
         const userCredential = await auth.signInWithEmailAndPassword(email, password);
+          console.log("Auth successful, getting user doc...");
+
         const userDoc = await db.collection('users').doc(userCredential.user.uid).get();
-        
+        console.log("User doc retrieved:", userDoc.exists);
+
         if (!userDoc.exists) {
-            throw new Error('User data not found in database');
+            console.error("User document not found for UID:", userCredential.user.uid);
+              await auth.signOut();
+              throw new Error('User data not found in database');
         }
+      // Rest of the login flow...
+    } catch (error) {
+        console.error("Login error:", error);
+        showError(loginForm, error.message);
+    }
+});
+     
 
+       /* // Redirect based on user type
         const userData = userDoc.data();
-        
-        // Check if user is verified
-        if (!userCredential.user.emailVerified) {
-            await auth.signOut();
-            throw new Error('Please verify your email before logging in');
-        }
-
-        // Redirect based on user type
         if (userData.type === 'charity') {
             window.location.href = 'charity-dashboard.html';
         } else if (userData.type === 'restaurant') {
@@ -82,92 +158,8 @@ loginForm.addEventListener('submit', async (e) => {
     } catch (error) {
         showError(loginForm, error.message);
     }
-});
-    /*auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            // Redirect to dashboard
-            return db.collection('users').doc(userCredential.user.uid).get();
-        })
-        .then((doc) => {
-            if (doc.exists){
-                const userData = doc.data();
-
-                if (userData.type === 'charity'){
-                    window.location.href = 'charity-dashboard.html';
-                } else if (userData.type === 'restaurant'){
-                    window.location.href = 'restaurant-dashboard.html';
-                } else {
-                    window.location.href = 'dashboard.html';
-                }
-            } else {
-                showError(loginForm, 'User data not found');
-            }
-        })
-        .catch((error) => {
-            showError(loginForm, error.message);
-        });
 });*/
-
-// Registration Function
-registerForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('register-email').value;
-    const password = document.getElementById('register-password').value;
-    const name = document.getElementById('register-name').value;
-    const accountType = document.getElementById('register-type').value;
-    
-      try {
-        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-        
-        // Add user data to Firestore
-        await db.collection('users').doc(userCredential.user.uid).set({
-            name: name,
-            email: email,
-            type: accountType,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        // Send verification email
-        await userCredential.user.sendEmailVerification();
-        alert('Registration successful! Please check your email for verification.');
-
-        // Redirect after verification
-        if (accountType === 'restaurant') {
-            window.location.href = 'restaurant-dashboard.html'; // Fixed typo
-        } else {
-            window.location.href = 'charity-dashboard.html';
-        }
-    } catch (error) {
-        showError(registerForm, error.message);
-    }
-});
-
-    /*auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            // Add user data to Firestore
-            return firebase.firestore().collection('users').doc(userCredential.user.uid).set({
-                name: name,
-                email: email,
-                type: accountType,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        })
-        .then(() => {
-            // Set custom claims based on account type
-            if (accountType === 'restaurant') {
-                return auth.currentUser.getIdToken(true)
-                    .then(() => {
-                        // Custom claims will be set via Firebase Functions
-                        window.location.href = 'resturant-dashboard.html';
-                    });
-            } else {
-                window.location.href = 'charity-dashboard.html';
-            }
-        })
-        .catch((error) => {
-            showError(registerForm, error.message);
-        });
-});*/
+   
 
 // Show error message
 function showError(form, message) {
@@ -210,18 +202,29 @@ auth.onAuthStateChanged(async user => {
         }
     }
 });
-    /*if (user) {
-        // User is logged in, redirect to appropriate dashboard
-        firebase.firestore().collection('users').doc(user.uid).get()
-            .then(doc => {
-                if (doc.exists) {
-                    const userData = doc.data();
-                    if (userData.type === 'restaurant') {
-                        window.location.href = 'resturant-dashboard.html';
-                    } else {
-                        window.location.href = 'charity-dashboard.html';
-                    }
-                }
-            });
+ 
+// test code
+// Add to login.js for testing
+window.testFirestoreWrite = async () => {
+    try {
+        console.log("Testing Firestore write...");
+        const testRef = db.collection('test_writes').doc('test_doc');
+        await testRef.set({
+            message: "This is a test document",
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        
+        // Verify
+        const doc = await testRef.get();
+        if (doc.exists) {
+            console.log("Firestore test successful!", doc.data());
+            return true;
+        } else {
+            console.error("Test document not found after write");
+            return false;
+        }
+    } catch (error) {
+        console.error("Firestore test failed:", error);
+        return false;
     }
-});*/
+};
