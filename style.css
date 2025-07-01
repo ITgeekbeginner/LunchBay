@@ -15,7 +15,7 @@ header{
 }
 
 body {
-    background: radial-gradient(circle, #EF2F15, #FFB505);
+    background-image: url('images/background.jpg');
     }
 /* Header Logo Style */
 .logo-container {
