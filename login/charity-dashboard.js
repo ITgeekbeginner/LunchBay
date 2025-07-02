@@ -8,13 +8,19 @@ const firebaseConfig = {
     appId: "1:83931299741:web:c653e27331cb7f3d14b974",
     measurementID: "G-Q55HMTQ3VP"
 };
-db = firebase.firestore();
 const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 // Logout
 const auth = firebase.auth();
 document.getElementById('logout-btn').addEventListener('click', () => {
-  auth.signOut();
+  auth.signOut()
+  .then(() => {
+    window.location.href = 'login.html';
+  })
+  .catch((error) => {
+    console.error('Logout error:', error);
+  });
 });
 
 async function loadDashboardData(userId) {

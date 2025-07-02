@@ -1,3 +1,18 @@
+// Firebase Configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyD8tptUGIUsijsdKNjJ-IiJao_xVpyczzY",
+    authDomain: "lunchbay-b864e.firebaseapp.com",
+    projectId: "lunchbay-b864e",
+    storageBucket: "lunchbay-b864e.firebasestorage.app",
+    messagingSenderId: "83931299741",
+    appId: "1:83931299741:web:c653e27331cb7f3d14b974",
+    measurementID: "G-Q55HMTQ3VP"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+
 document.addEventListener('DOMContentLoaded', () => {
     // Simulate loading process
     const loadingDuration = 7000; // 3 seconds
@@ -24,20 +39,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }, loadingDuration / 10);
 });
 
+// At the end of your loading.js file, update the redirect path:
 function checkAuthStatus() {
-    // In a real app, you would check Firebase auth state here
-    const isAuthenticated = false; // Replace with actual check
-    
-    if (isAuthenticated) {
-        window.location.href = 'dashboard.html';
-    } else {
-        window.location.href = 'login.html';
-    }
-}
+    // For Firebase version:
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            firebase.firestore().collection('users').doc(user.uid).get()
+                .then(doc => {
+                    window.location.href = doc.data().type === 'restaurant' 
+                        ? '../index.html'          // Goes back to root
+                        : '../login/login.html'; // Goes back to root
+                });
+        } else {
+            window.location.href = 'login/login.html'; // Points to login folder
+        }
+    });
 
-// Optional: Add this if you want to skip loading when testing
-document.addEventListener('keypress', (e) => {
-    if (e.key === 's') { // Press 's' to skip
-        window.location.href = 'login.html';
-    }
-});
+    // For non-Firebase version:
+    // window.location.href = 'login/login.html';
+}
