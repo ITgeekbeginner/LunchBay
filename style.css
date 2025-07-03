@@ -1,236 +1,71 @@
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Ariel', sans-serif;
-}
-
-h2, h3 {
-    color: black;
-}
-
-header{
-    text-align: center;
-}
-
+/* Basic Dashboard Styles */
 body {
-    background-image: url('images/background.jpg');
-    }
-/* Header Logo Style */
-.logo-container {
-  text-align: center;
-  margin-bottom: 1rem;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
-.logo {
-  height: 100px; /* Adjust as needed */
-  width: 150px;
-  max-width: 200px;
-  border-radius: 50px;
-  
+.dashboard-header {
+  background: linear-gradient(#EF2F15, #FFB505);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+.dashboard-logo {
+  height: 50px;
 }
 
-main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 1rem;
+.dashboard-header nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
-.stats-card {
-    background-color: #EF2F15;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    text-align: center;
+.dashboard-header a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-.stats-card h3 {
-    color: black;
-    margin-bottom: 0.5rem;
+.dashboard-header button {
+  background: black;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.stats-card p {
-    color: black;
-    font-size: 2rem;
-    font-weight: bold;
+.dashboard-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.btn {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    margin: 0.5rem 0;
+.dashboard-container section {
+  margin-bottom: 40px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.primary-btn {
-    background-color: black;
-    color: white;
-    width: 100%;
-    height: 30px;
+.donation-card, .pickup-card {
+  background: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border-left: 4px solid #FFB505;
 }
 
-.secondary-btn {
-    background-color: rgb(8, 8, 8);
-    color: rgb(255, 253, 253);
-    width: 100%;
-    height: 30px;
-    
-}
-
-.secondary-btn:hover{
-     font-size: 1rem;
-     color: #ffffff;
-     position: relative;
-     display: inline-block;
-}
-
-.secondary-btn::after,
-.secondary-btn::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, green, #00ffff);
-  bottom: -5px;
-  left: 0;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.4s ease-out;
-}
-
-.secondary-btn::before {
-  top: -5px;
-  transform-origin: left;
-}
-
-.secondary-btn:hover::after,
-.secondary-btn:hover::before {
-  transform: scaleX(1);
-}
-
-.primary-btn:hover{
-     font-size: 1rem;
-     color: #ffffff;
-     position: relative;
-     display: inline-block;
-}
-
-.primary-btn::after,
-.primary-btn::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, green, #00ffff);
-  bottom: -5px;
-  left: 0;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.4s ease-out;
-}
-
-.primary-btn::before {
-  top: -5px;
-  transform-origin: left;
-}
-
-.primary-btn:hover::after,
-.primary-btn:hover::before {
-  transform: scaleX(1);
-}
-
-.btn:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-}
-
-.food-list {
-    background: #EF2F15;
-    color: black;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin: 1.5rem 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.food-list h2 {
-    margin-bottom: 1rem;
-    color: black;
-}
-
-#food-items {
-    list-style: none;
-}
-
-.food-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    border-bottom: 1px solid black;
-}
-
-.food-item:last-child {
-    border-bottom: none;
-}
-
-.hidden {
-    display: none;
-}
-
-/* Form Styles */
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid black;
-    border-radius: 4px;
-    font-size: 1rem;
-    background-color: #EF2F15;
-}
-
-.form-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-/* Map Styles */
-#map {
-    height: 300px;
-    background-color: black;
-    margin: 1.5rem 0;
-    border-radius: 8px;
-}
-
-footer {
-    position: relative;
-    text-align: center;
-    padding: 1.0rem;
-    margin-top: 4.3rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    background-color: #EF2F15;
-    color: black;
+.accept-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
 }
