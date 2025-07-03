@@ -73,29 +73,8 @@ python -m http.server
 
 # Or with Live Server in VS Code
 Project Structure 📂
-text
-LUNCHBAY/
-|-- loading-page/       # Landing/Home page
-|   |-- loading.css
-|   |-- loading.html
-|   |-- loading.js
-|   |-- logo.png
-├── index.html          # Main application entry point/ inventory page
-├── charity-portal.html # Charity organization portal
-├── login/
-│   ├── login.html      # Login page
-│   └── register.html   # Registration page
-|   .......             # other related pages
-|
-│── style.css       # Main stylesheet
-│        
-|
-│--script.js          # Main application logic
-│── no de_modules/       # node dependencies
-│── firebase-config.js # Firebase configuration
-│── charity-portal.js # Charity portal logic
-├── images/             # All static images
-└── README.md           # This file
+![App Screenshot](/images/workflow.png)
+
 Usage Guide 📖
 For Restaurants:
 Register/Sign in

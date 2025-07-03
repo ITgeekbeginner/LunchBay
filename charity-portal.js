@@ -1,4 +1,4 @@
-// Initialize Firebase (same config as main app)
+// Initialize Firebase 
 const firebaseConfig = {
   apiKey: "AIzaSyD8tptUGIUsijsdKNjJ-IiJao_xVpyczzY",
   authDomain: "lunchbay-b864e.firebaseapp.com",
@@ -18,7 +18,7 @@ const pickupsList = document.getElementById('pickups');
 const foodTypeFilter = document.getElementById('food-type-filter');
 const refreshBtn = document.getElementById('refresh-btn');
 
-// Load data
+// Loads data
 function loadDonations() {
   let query = db.collection('foodItems')
     .where('status', '==', 'available');
@@ -45,7 +45,7 @@ function loadDonations() {
       donationsList.appendChild(li);
     });
     
-    // Add event listeners
+    // event listeners
     document.querySelectorAll('.claim-btn').forEach(btn => {
       btn.addEventListener('click', claimDonation);
     });
@@ -55,7 +55,7 @@ function loadDonations() {
 function loadScheduledPickups() {
   db.collection('foodItems')
     .where('status', '==', 'claimed')
-    .where('claimedBy', '==', auth) // In real app, use auth
+    .where('claimedBy', '==', auth) 
     .onSnapshot(snapshot => {
       pickupsList.innerHTML = '';
       
@@ -85,7 +85,7 @@ function claimDonation(e) {
   
   db.collection('foodItems').doc(donationId).update({
     status: 'claimed',
-    claimedBy: 'YOUR_CHARITY_ID', // In real app, use auth
+    claimedBy: auth, 
     claimedAt: firebase.firestore.FieldValue.serverTimestamp()
   }).then(() => {
     alert('Donation claimed successfully!');

@@ -90,6 +90,6 @@ auth.onAuthStateChanged(async user => {
             window.location.href = 'index.html';
         }
     }
-    // If user exists but isn't verified, stay on this page
+    
 });
     

@@ -21,7 +21,6 @@ try {
     console.error("Firestore initialization error:", error);
     throw error;
 }
-//const db = firebase.firestore();
 const auth = firebase.auth();
 
 // DOM Elements
@@ -74,24 +73,24 @@ registerForm.addEventListener('submit', async (e) => {
         const uid = userCredential.user.uid;
         console.log("Auth user created with UID:", uid);
         
-          // 2. Prepare user data
+          //  Prepare user data
         const userData = {
             name: name,
             email: email,
             type: accountType,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             emailVerified: false,
-            uid: uid // Add UID to document for easier queries
+            uid: uid 
         };
 
-            // Use transaction to ensure both operations succeed
+            
         await db.runTransaction(async (transaction) => {
             const userRef = db.collection('users').doc(uid);
             transaction.set(userRef, userData);
         });
 
         
-        // 5. Send verification email
+        // Send verification email
         console.log("Sending verification email...");
         await userCredential.user.sendEmailVerification();
         
@@ -138,28 +137,12 @@ loginForm.addEventListener('submit', async (e) => {
               await auth.signOut();
               throw new Error('User data not found in database');
         }
-      // Rest of the login flow...
+      
     } catch (error) {
         console.error("Login error:", error);
         showError(loginForm, error.message);
     }
 });
-     
-
-       /* // Redirect based on user type
-        const userData = userDoc.data();
-        if (userData.type === 'charity') {
-            window.location.href = 'charity-dashboard.html';
-        } else if (userData.type === 'restaurant') {
-            window.location.href = 'restaurant-dashboard.html'; // Fixed typo
-        } else {
-            window.location.href = 'dashboard.html';
-        }
-    } catch (error) {
-        showError(loginForm, error.message);
-    }
-});*/
-   
 
 // Show error message
 function showError(form, message) {
@@ -203,8 +186,7 @@ auth.onAuthStateChanged(async user => {
     }
 });
  
-// test code
-// Add to login.js for testing
+// login.js for testing
 window.testFirestoreWrite = async () => {
     try {
         console.log("Testing Firestore write...");

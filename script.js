@@ -1,4 +1,4 @@
-// Initialize Firebase (add to top of script.js)
+// Initialize Firebase 
 const firebaseConfig = {
   apiKey: "AIzaSyD8tptUGIUsijsdKNjJ-IiJao_xVpyczzY",
   authDomain: "lunchbay-b864e.firebaseapp.com",
@@ -42,7 +42,7 @@ db.collection('foodItems')
     totalSavedEl.textContent = `${total} ${foodItems[0]?.unit || 'lbs'}`;
   });
 
-// Sample data - in a real app, you would use a database
+// Sample data
 let foodItems = [];
 let totalSaved = 0;
 
@@ -59,7 +59,7 @@ const foodItemsList = document.getElementById('food-items');
 const totalSavedEl = document.getElementById('total-saved');
 const charitiesList = document.getElementById('charities');
 
-// Modify food submission handler
+// food submission handler
 foodForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   
@@ -179,7 +179,7 @@ function displayCharities() {
         charitiesList.appendChild(li);
     });
     
-    // Add event listeners to schedule buttons
+    // event listeners to schedule buttons
     document.querySelectorAll('.schedule-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const charityId = e.target.getAttribute('data-id');
@@ -204,7 +204,7 @@ function updateTotalSaved(quantity) {
 displayFoodItems();
 
   function initMap() {
-    // Your map initialization code will go here
+    // map initialization 
      map = new google.maps.Map(document.getElementById("map"), {
       center: { lat: -34.397, lng: 150.644 },
       zoom: 8,
@@ -213,7 +213,6 @@ displayFoodItems();
 
   function loadGoogleMaps() {
     const script = document.createElement('script');
-    //script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD8tptUGIUsijsdKNjJ-IiJao_xVpyczzY&libraries=places&callback=initMap';
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);

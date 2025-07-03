@@ -16,7 +16,7 @@ const auth = firebase.auth();
 document.getElementById('logout-btn').addEventListener('click', () => {
   auth.signOut()
   .then(() => {
-    window.location.href = 'login.html';
+    window.location.href = '/index.html';
   })
   .catch((error) => {
     console.error('Logout error:', error);
@@ -25,13 +25,13 @@ document.getElementById('logout-btn').addEventListener('click', () => {
 
 async function loadDashboardData(userId) {
   try {
-    // Load charity-specific data
+    // Loads charity-specific data
     const userDoc = await db.collection('users').doc(userId).get();
     const userData = userDoc.data();
     
     document.title = `${userData.name} Dashboard`;
     
-    // Load available donations
+    // Loads available donations
     const donationsSnapshot = await db.collection('donations')
       .where('status', '==', 'available')
       .orderBy('pickupDate')
@@ -56,7 +56,7 @@ async function loadDashboardData(userId) {
     
     document.getElementById('requests').appendChild(donationsList);
     
-    // Load scheduled pickups
+    // Loads scheduled pickups
     const pickupsSnapshot = await db.collection('donations')
       .where('charityId', '==', userId)
       .where('status', '==', 'scheduled')
@@ -82,7 +82,7 @@ async function loadDashboardData(userId) {
     
     document.getElementById('schedule').appendChild(pickupsList);
     
-    // Add event listeners for accept buttons
+    // event listeners for accept buttons
     document.querySelectorAll('.accept-btn').forEach(btn => {
       btn.addEventListener('click', async (e) => {
         const donationId = e.target.getAttribute('data-id');
