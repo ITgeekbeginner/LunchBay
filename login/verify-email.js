@@ -71,7 +71,7 @@ logoutBtn.addEventListener('click', async () => {
 
 auth.onAuthStateChanged(async user => {
     if (!user) {
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
     } else if (user.emailVerified) {
         try {
        const userDoc = await db.collection('users').doc(user.uid).get();
@@ -87,7 +87,7 @@ auth.onAuthStateChanged(async user => {
             }
         } catch (error) {
             console.error('Error checking user type:', error);
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }
     }
     // If user exists but isn't verified, stay on this page

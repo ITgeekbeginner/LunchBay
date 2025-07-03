@@ -55,7 +55,7 @@ function loadDonations() {
 function loadScheduledPickups() {
   db.collection('foodItems')
     .where('status', '==', 'claimed')
-    .where('claimedBy', '==', 'YOUR_CHARITY_ID') // In real app, use auth
+    .where('claimedBy', '==', auth) // In real app, use auth
     .onSnapshot(snapshot => {
       pickupsList.innerHTML = '';
       
