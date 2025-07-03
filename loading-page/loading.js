@@ -15,7 +15,7 @@ const auth = firebase.auth();
 
 document.addEventListener('DOMContentLoaded', () => {
     // Simulate loading process
-    const loadingDuration = 7000; // 3 seconds
+    const loadingDuration = 7000; // 7 seconds
     
     // 1. Check authentication status (simulated)
     setTimeout(() => {
@@ -51,10 +51,8 @@ function checkAuthStatus() {
                         : '../login/login.html'; // Goes back to root
                 });
         } else {
-            window.location.href = 'login/login.html'; // Points to login folder
+            window.location.href = '/login/login.html'; // Points to login folder
         }
     });
 
-    // For non-Firebase version:
-    // window.location.href = 'login/login.html';
 }
